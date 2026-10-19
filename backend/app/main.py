@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.config import settings
 from backend.core.engine_status import get_engine_status
+from backend.app.routes import router as api_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -17,6 +18,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_router)
 
 @app.get("/")
 def service_discovery():
