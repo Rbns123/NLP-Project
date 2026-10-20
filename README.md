@@ -59,15 +59,22 @@ NLP_PROJECT/
 
 ## 🚀 Quickstart Guide (macOS / Apple Silicon)
 
-### Prerequisites Check
-Open your Terminal and verify:
+### The Single-Command Run (Recommended)
+You can start everything (backend + frontend + browser) with one single command:
 ```bash
-python3 --version   # Python 3.11+
-node --version      # Node 20+
-git --version
+./run.sh
 ```
+This automatically:
+1. Cleans any previous stale processes on ports `8000` and `5173`.
+2. Activates the Python virtual environment and verifies dependencies.
+3. Launches the **FastAPI backend** on port `8000`.
+4. Launches the **React Vite frontend** on port `5173`.
+5. Automatically opens **http://localhost:5173** in your default Mac browser.
+6. Pressing **`Ctrl + C`** cleanly stops both servers together.
 
-### 1. Backend Setup & Run
+---
+
+### Manual Step-by-Step Run (Alternative)
 ```bash
 # In the project root (/Users/neel/NLP_PROJECT):
 python3 -m venv .venv
