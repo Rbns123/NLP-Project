@@ -29,7 +29,7 @@ CHECKLIST_RULES = [
         "patterns": [
             r"https?://github\.com/[a-zA-Z0-9_\-\./]+",
             r"https?://gitlab\.com/[a-zA-Z0-9_\-\./]+",
-            r"\b(?:code is available at|source code will be released|repository:)\b"
+            r"\b(?:code is available at|source code will be released|repository:|code and pre-trained models are available|open-source code)\b"
         ]
     },
     {
@@ -37,8 +37,8 @@ CHECKLIST_RULES = [
         "label": "Dataset Statement",
         "description": "Explicit statement of training/evaluation dataset used or public dataset availability.",
         "patterns": [
-            r"\b(?:dataset(?:s)? is publicly available|downloaded from|dataset was collected|corpus contains|benchmark dataset)\b",
-            r"\b(?:squad|glue|superglue|imdb|imagenet|scierc|pubmed)\b"
+            r"\b(?:dataset(?:s)? (?:is|are) publicly available|downloaded from|dataset was collected|corpus contains|benchmark dataset|training data|fine-tuning data)\b",
+            r"\b(?:squad|glue|superglue|imdb|imagenet|scierc|pubmed|wmt|bookcorpus|wikipedia|mnli|sst-2|conll)\b"
         ]
     },
     {
@@ -46,8 +46,9 @@ CHECKLIST_RULES = [
         "label": "Hyperparameters",
         "description": "Learning rate, batch size, epochs, or optimizer configuration.",
         "patterns": [
-            r"\b(?:learning rate|batch size|epochs?|adamw|adam optimizer|weight decay|warmup steps?)\b",
-            r"\blr\s*=\s*[0-9\.e\-]+"
+            r"\b(?:learning rate|batch size|epochs?|adamw|adam optimizer|adam|weight decay|warmup steps?|dropout|hidden size|layers|attention heads)\b",
+            r"\blr\s*=\s*[0-9\.e\-]+",
+            r"\bbatch size of \d+"
         ]
     },
     {
@@ -55,7 +56,8 @@ CHECKLIST_RULES = [
         "label": "Random Seeds",
         "description": "Specific random seed(s) for stochastic reproducibility.",
         "patterns": [
-            r"\b(?:random seed|seed\s*=\s*\d+|seeds? (?:42|0|1|123|1234|2024))\b"
+            r"\b(?:random seed|seed\s*=\s*\d+|seeds? (?:42|0|1|123|1234|2024)|initialized with seed)\b",
+            r"\b(?:stochastic|random initialization|randomly initialized|initialized randomly)\b"
         ]
     },
     {
@@ -63,7 +65,7 @@ CHECKLIST_RULES = [
         "label": "Hardware Specification",
         "description": "Compute infrastructure: GPUs, TPUs, Apple Silicon, or CPU clusters.",
         "patterns": [
-            r"\b(?:nvidia|a100|v100|rtx\s*\d+|tpu|gpu|apple m\d+|trained on \d+ (?:gpus|nodes))\b"
+            r"\b(?:nvidia|a100|v100|k80|p100|rtx\s*\d+|tpu|gpu|gpus|cloud tpus?|apple m\d+|trained on \d+ (?:gpus|tpus|nodes))\b"
         ]
     },
     {
@@ -71,7 +73,7 @@ CHECKLIST_RULES = [
         "label": "Baseline Comparisons",
         "description": "Explicit comparison against competitive baseline models or prior works.",
         "patterns": [
-            r"\b(?:compared (?:with|against|to) baseline|competitive baselines|state-of-the-art baselines|prior work)\b"
+            r"\b(?:compared (?:with|against|to) baseline|competitive baselines|state-of-the-art baselines|prior work|baseline models?|previous work|ablation study)\b"
         ]
     },
     {
@@ -79,7 +81,7 @@ CHECKLIST_RULES = [
         "label": "Statistical Significance",
         "description": "Significance tests, p-values, confidence intervals, or standard deviations.",
         "patterns": [
-            r"\b(?:p\s*<\s*0\.0[0-9]+|statistically significant|paired t-test|confidence interval|standard deviation|std dev|\bstd\b|±\s*[0-9\.]+)\b"
+            r"\b(?:p\s*<\s*0\.0[0-9]+|statistically significant|paired t-test|confidence interval|standard deviation|std dev|\bstd\b|±\s*[0-9\.]+|error bars|variance)\b"
         ]
     }
 ]
