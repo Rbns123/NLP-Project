@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CompareModal from './components/CompareModal';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('summary'); // 'summary', 'triplets', 'claims', 'repro'
@@ -8,6 +9,7 @@ export default function App() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
+  const [showCompare, setShowCompare] = useState(false);
 
   const pollJob = (id) => {
     setStatus('processing');
@@ -102,14 +104,24 @@ export default function App() {
 
         <div style={{ display: 'flex', gap: '12px' }}>
           {result && (
-            <button
-              onClick={() => setResult(null)}
-              style={{
-                background: '#1f2937', border: '1px solid #374151', color: '#e5e7eb',
-                padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 600
-              }}>
-              ← Test Another Paper
-            </button>
+            <>
+              <button
+                onClick={() => setShowCompare(true)}
+                style={{
+                  background: 'rgba(99, 102, 241, 0.15)', border: '1px solid #6366f1', color: '#a5b4fc',
+                  padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 700
+                }}>
+                ⇄ Compare 2 Papers
+              </button>
+              <button
+                onClick={() => setResult(null)}
+                style={{
+                  background: '#1f2937', border: '1px solid #374151', color: '#e5e7eb',
+                  padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 600
+                }}>
+                ← Test Another Paper
+              </button>
+            </>
           )}
 
           <button
@@ -438,6 +450,11 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* Side-by-Side Compare Modal */}
+      {showCompare && result && (
+        <CompareModal onClose={() => setShowCompare(false)} baseResult={result} />
+      )}
     </div>
   );
 }
