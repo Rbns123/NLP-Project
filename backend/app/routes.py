@@ -12,6 +12,18 @@ router = APIRouter(prefix="/api", tags=["PaperLens Pipeline"])
 SAMPLE_PAPERS_DIR = pathlib.Path(__file__).resolve().parent.parent.parent / "sample_papers"
 
 PRESET_PAPERS = {
+    "electra": {
+        "title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators",
+        "authors": "Kevin Clark et al. (ICLR 2020)",
+        "file": "electra_paper.pdf",
+        "description": "High reproducibility benchmark paper reporting learning rates, seeds, hardware, and baseline comparisons."
+    },
+    "roberta": {
+        "title": "RoBERTa: A Robustly Optimized BERT Pretraining Approach",
+        "authors": "Yinhan Liu et al. (2019)",
+        "file": "roberta_paper.pdf",
+        "description": "Optimized pretraining study detailing large batch sizes and extensive compute infrastructure."
+    },
     "bert": {
         "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
         "authors": "Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova (NAACL 2019)",

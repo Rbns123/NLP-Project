@@ -138,23 +138,73 @@ export default function App() {
 
             {/* Action Box */}
             <div className="glass-panel" style={{ padding: '36px', border: '2px dashed #374151', borderRadius: '14px', background: '#111827' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap', marginBottom: '24px' }}>
                 <button
                   onClick={handleDemoRun}
                   style={{
                     padding: '12px 26px', background: 'var(--primary-gradient)', border: 'none',
                     borderRadius: '8px', cursor: 'pointer', fontWeight: 700, fontSize: '15px', color: '#fff'
                   }}>
-                  ⚡ Try Sample Paper (All Categories Present)
+                  ⚡ Benchmark Demo Paper (100% Score)
                 </button>
 
                 <label style={{
                   padding: '12px 24px', background: '#1f2937', border: '1px solid #374151',
                   borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '15px', color: '#f3f4f6'
                 }}>
-                  Upload PDF or DOCX
+                  Upload Any PDF from Mac
                   <input type="file" accept=".pdf,.docx" onChange={handleFileUpload} style={{ display: 'none' }} />
                 </label>
+              </div>
+
+              {/* 3 Quick-Test Preset Buttons with Target Scores */}
+              <div style={{ borderTop: '1px solid #1f2937', paddingTop: '20px', textAlign: 'center' }}>
+                <div style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '12px', fontWeight: 600 }}>
+                  Or Click to Instantly Test a Research Paper by Score:
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                  <button
+                    onClick={() => {
+                      fetch('http://localhost:8000/api/analyze-preset/electra', { method: 'POST' })
+                        .then(r => r.json())
+                        .then(d => pollJob(d.job_id))
+                        .catch(e => setError(e.message));
+                    }}
+                    style={{
+                      background: 'rgba(52, 211, 153, 0.1)', border: '1px solid #34d399', color: '#34d399',
+                      padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 700
+                    }}>
+                    📄 ELECTRA Paper → 85% Score
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      fetch('http://localhost:8000/api/analyze-preset/roberta', { method: 'POST' })
+                        .then(r => r.json())
+                        .then(d => pollJob(d.job_id))
+                        .catch(e => setError(e.message));
+                    }}
+                    style={{
+                      background: 'rgba(56, 189, 248, 0.1)', border: '1px solid #38bdf8', color: '#38bdf8',
+                      padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 700
+                    }}>
+                    📄 RoBERTa Paper → 71% Score
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      fetch('http://localhost:8000/api/analyze-preset/bert', { method: 'POST' })
+                        .then(r => r.json())
+                        .then(d => pollJob(d.job_id))
+                        .catch(e => setError(e.message));
+                    }}
+                    style={{
+                      background: 'rgba(245, 158, 11, 0.1)', border: '1px solid #f59e0b', color: '#fbbf24',
+                      padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 700
+                    }}>
+                    📄 BERT Paper → 57% Score
+                  </button>
+                </div>
               </div>
 
               {/* Progress Bar */}
